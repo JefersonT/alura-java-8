@@ -1,8 +1,7 @@
 package br.com.alura.alurajava8;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class ExemploCursos {
@@ -36,12 +35,40 @@ public class ExemploCursos {
 //                .filter(curso -> curso.getAlunos() >= 100)
 //                .forEach(c -> System.out.println(c.getAlunos()));
 
+        System.out.println("SOMA O NUMEROS DE ALUNOS");
         int sum = cursos.stream()
                 .filter(curso -> curso.getAlunos() >= 100)
                 .mapToInt(Curso::getAlunos)
                 .sum();
         System.out.println(sum);
 
+        // Retorna uma Stream de String apartir de uma Stream de cursos
         Stream<String> nomes = cursos.stream().map(Curso::getNome);
+
+
+        System.out.println("IMPRIMI QUAL QUER CURSO COM MAIS DE 100 ALUNOS");
+        // Retorna qualquer elemento do filtro
+        Optional<Curso> cursoAny = cursos.stream()
+                .filter(curso -> curso.getAlunos() >= 100)
+                .findAny();
+
+        cursoAny.ifPresent(c -> System.out.println(c.getNome()));
+
+        System.out.println("IMPRIMI O PRIMEIRO CURSO COM MAIS DE 100 ALUNOS");
+        // Retorna o primeiro elemento do filtro
+        Optional<Curso> curso1 = cursos.stream()
+                .filter(curso -> curso.getAlunos() >= 100)
+                .findFirst();
+
+        System.out.println("IMPRIME A MÉDIA DE ALUNOS");
+        OptionalDouble average = cursos.stream()
+                .mapToInt(Curso::getAlunos)
+                .average();
+        System.out.println(average);
+
+        // Transformando Stream em List
+        List<Curso> list = cursos.stream()
+                .filter(c -> c.getAlunos() > 50)
+                .collect(Collectors.toList());
     }
 }
