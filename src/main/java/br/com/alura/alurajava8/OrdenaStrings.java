@@ -48,10 +48,28 @@ public class OrdenaStrings {
 		palavras.sort(comparator2);
 		System.out.println(palavras);
 
+			// ORDENAR COM LAMBDAS
+		System.out.println("---ORDENAR COM LAMBDAS");
+		palavras.sort((s1, s2) -> {
+			if (s1.length() > s2.length())
+			return 1;
+			if (s1.length() < s2.length())
+				return -1;
+			return 0;
+		});
+
+		// ORDENAR COM LAMBDAS - SIMPLIFICANDO A COMPARAÇÃO
+		System.out.println("---ORDENAR COM LAMBDAS - SIMPLIFICANDO A COMPARAÇÃO");
+		palavras.sort((s1, s2) -> Integer.compare(s1.length(), s2.length()));
+
 			// IMPRIMIR CADA ELEMENTO DA LISTA
 		System.out.println("---IMPRIMIR CADA ELEMENTO DA LISTA");
 		Consumer<String> consumidor = new ImprimeNaLinha();
 		palavras.forEach(consumidor);
+
+			// USANDO LAMBDAS
+		System.out.println("---USANDO LAMBDAS");
+		palavras.forEach(s -> System.out.println(s));
 	}
 
 }
