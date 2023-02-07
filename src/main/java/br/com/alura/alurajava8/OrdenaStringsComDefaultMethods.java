@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.function.Consumer;
 
 @SpringBootApplication
-public class OrdenaStrings {
+public class OrdenaStringsComDefaultMethods {
 
 	public static void main(String[] args) {
 		List<String> palavras = new ArrayList<>();
@@ -18,25 +18,25 @@ public class OrdenaStrings {
 		palavras.add("caelum");
 
 
-		//ANTES DO JAVA 8
-		System.out.println("ANTES DO JAVA 8");
+		//APARTIR DO JAVA 8
+		System.out.println("APARTIR DO JAVA 8");
 
 		//ORDENAR COM COMPARADOR NATURAL
 		System.out.println("---ORDENAR COM COMPARADOR NATURAL");
 		Collections.sort(palavras);
 		System.out.println(palavras);
 
-		//ORDENAR COM COMPARADOR DEFINIDO
-		System.out.println("---ORDENAR COM COMPARADOR DEFINIDO");
-		Comparator<String> comparator = new ComparadorPorTamanho();
-		Collections.sort(palavras, comparator);
+		// ORDENAR COM COMPADADOR DEFINIDO
+		System.out.println("---ORDENAR COM COMPADADOR DEFINIDO");
+		Comparator<String> comparator2 = new ComparadorPorTamanho();
+		palavras.sort(comparator2);
 		System.out.println(palavras);
 
 		// IMPRIMIR CADA ELEMENTO DA LISTA
 		System.out.println("---IMPRIMIR CADA ELEMENTO DA LISTA");
-		for (String p : palavras) {
-			System.out.println(p);
-		}
+		Consumer<String> consumidor = new ImprimeNaLinha();
+		palavras.forEach(consumidor);
+
 	}
 
 }
